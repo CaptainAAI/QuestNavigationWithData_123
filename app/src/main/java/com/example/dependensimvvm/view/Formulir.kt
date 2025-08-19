@@ -50,14 +50,14 @@ fun FormIsian(pilihanJK: List<String> , onSubmitBtnClick: () -> Unit) {
     ) { paddingValues ->
         IsiRuang(
             paddingValues = paddingValues,
-            namaLengkap = namaLengkap,
-            onNamaLengkapChange = { namaLengkap = it },
-            alamat = alamat,
-            onAlamatChange = { alamat = it },
-            jenisK = jenisK,
-            jenisKelamin = jenisKelamin,
-            onJenisKelaminSelected = { jenisKelamin = it },
-            onSubmitBtnClick = onSubmitBtnClick
+            namaLengkap = txtNama,
+            onNamaLengkapChange = { txtNama = it },
+            alamat = txtAlamat,
+            onAlamatChange = { txtAlamat = it },
+            jenisK = pilihanJK,
+            jenisKelamin = txtGender,
+            onJenisKelaminSelected = { txtGender = it },
+            onSubmitBtnClick = { onSubmitBtnClick(txtNama, txtAlamat, txtGender) }
         )
     }
 }
