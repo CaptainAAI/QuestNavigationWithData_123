@@ -3,6 +3,7 @@ package com.example.dependensimvvm.uicontroller
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -23,20 +24,23 @@ enum class Navigasi {
 fun DataApp(
     viewModel: SiswaViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
-
 ) {
-    Scaffold { paddingValues ->
+    Scaffold { isiRuang ->
         val uiState = viewModel.statusUI.collectAsState()
+        val konteks = LocalContext.current
+
+        val pilihanJK = listOf("Laki-laki", "Perempuan")
+
         NavHost(
             navController = navController,
             startDestination = Navigasi.Formulir.name,
-            modifier = Modifier.padding(paddingValues = paddingValues)
+            modifier = Modifier.padding(isiRuang)
         ) {
             composable(route = Navigasi.Formulir.name) {
-                val Konteks = LocalContext.current
                 FormIsian(
-                    pilihanJK =JenisK.map{ id -> konteks.resources.getstring(id)},
-                    onSubmitBtnClick = {
+                    pilihanJK = pilihanJK,
+                    onSubmitBtnClick = { nama: String, alamat: String, jk: String ->
+                        viewModel.setSiswa(mutableListOf(nama, jk, alamat))
                         navController.navigate(route = Navigasi.Detail.name)
                     }
                 )
