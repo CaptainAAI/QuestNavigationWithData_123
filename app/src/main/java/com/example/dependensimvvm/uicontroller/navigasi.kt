@@ -35,6 +35,7 @@ fun DataApp(
             composable(route = Navigasi.Formulir.name) {
                 val Konteks = LocalContext.current
                 FormIsian(
+                    pilihanJK =JenisK.map{ id -> konteks.resources.getstring(id)},
                     onSubmitBtnClick = {
                         navController.navigate(route = Navigasi.Detail.name)
                     }
