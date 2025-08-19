@@ -29,11 +29,11 @@ import com.example.dependensimvvm.model.DataSiswa
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TampilData(statusSiswa: DataSiswa, onBackBtnClick: () -> Unit) {
+fun TampilData(statusUiSiswa: DataSiswa, onBackBtnClick: () -> Unit) {
     val items = listOf(
-        Pair(first = stringResource(id = R.string.nama_lengkap), second = "Bening Namira"),
-        Pair(first = stringResource(id = R.string.jenis_kelamin), second = "Laki-laki"),
-        Pair(first = stringResource(id = R.string.alamat), second = "Yogyakarta")
+        Pair(first = stringResource(id = R.string.nama_lengkap), statusUiSiswa.nama),
+        Pair(first = stringResource(id = R.string.jenis_kelamin), statusUiSiswa.gender),
+        Pair(first = stringResource(id = R.string.alamat), statusUiSiswa.alamat)
     )
 
     Scaffold(
