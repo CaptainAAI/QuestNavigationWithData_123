@@ -36,11 +36,13 @@ import com.example.dependensimvvm.model.DataJK
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FormIsian(pilihanJK: List<String> , onSubmitBtnClick: () -> Unit) {
+fun FormIsian(
+    pilihanJK: List<String>,
+    onSubmitBtnClick: (String, String, String) -> Unit
+) {
     var txtNama by rememberSaveable { mutableStateOf("") }
-    var txtAlamat by remember { mutableStateOf("") }
-    var txtGender by remember { mutableStateOf("") }
-    val listData: MutableList<String> = mutableListOf(txtNama,txtGender,txtAlamat)
+    var txtAlamat by rememberSaveable { mutableStateOf("") }
+    var txtGender by rememberSaveable { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -59,7 +61,7 @@ fun FormIsian(pilihanJK: List<String> , onSubmitBtnClick: () -> Unit) {
             jenisK = pilihanJK,
             jenisKelamin = txtGender,
             onJenisKelaminSelected = { txtGender = it },
-            onSubmitBtnClick = { onSubmitBtnClick() }
+            onSubmitBtnClick = { onSubmitBtnClick(txtNama, txtAlamat, txtGender) }
         )
     }
 }
@@ -75,7 +77,7 @@ fun IsiRuang(
     jenisKelamin: String,
     onJenisKelaminSelected: (String) -> Unit,
     onSubmitBtnClick: () -> Unit
-) {
+)  {
     Column(
         modifier = Modifier
             .padding(paddingValues)
@@ -83,7 +85,7 @@ fun IsiRuang(
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
+    )  {
         OutlinedTextField(
             value = namaLengkap,
             onValueChange = onNamaLengkapChange,
@@ -114,25 +116,16 @@ fun IsiRuang(
 
         OutlinedTextField(
             value = alamat,
+            onValueChange = onAlamatChange,
             singleLine = true,
-            shape = MaterialTheme.shapes.medium,
-            modifier = Modifier.Width(250.dp),
-            label = { Text(text = "Alamat Lengkap")},
-            onValueChange = {
-                txtAlamat = it
-            }
-
-
-
+            modifier = Modifier.fillMaxWidth(),
             label = { Text(text = "Alamat") }
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
-            modifier = Modifier.fillMaxWidth(if),
             onClick = onSubmitBtnClick,
-
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = stringResource(id = R.string.submit))
