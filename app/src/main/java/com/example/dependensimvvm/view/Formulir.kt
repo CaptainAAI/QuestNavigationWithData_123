@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -31,6 +32,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.dependensimvvm.R
+import com.example.dependensimvvm.model.DataJK
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,7 +59,7 @@ fun FormIsian(pilihanJK: List<String> , onSubmitBtnClick: () -> Unit) {
             jenisK = pilihanJK,
             jenisKelamin = txtGender,
             onJenisKelaminSelected = { txtGender = it },
-            onSubmitBtnClick = { onSubmitBtnClick(txtNama, txtAlamat, txtGender) }
+            onSubmitBtnClick = { onSubmitBtnClick() }
         )
     }
 }
@@ -112,16 +114,25 @@ fun IsiRuang(
 
         OutlinedTextField(
             value = alamat,
-            onValueChange = onAlamatChange,
             singleLine = true,
-            modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium,
+            modifier = Modifier.Width(250.dp),
+            label = { Text(text = "Alamat Lengkap")},
+            onValueChange = {
+                txtAlamat = it
+            }
+
+
+
             label = { Text(text = "Alamat") }
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
+            modifier = Modifier.fillMaxWidth(if),
             onClick = onSubmitBtnClick,
+
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = stringResource(id = R.string.submit))
