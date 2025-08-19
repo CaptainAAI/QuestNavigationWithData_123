@@ -33,16 +33,11 @@ import com.example.dependensimvvm.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FormIsian(pilihanJK: List<String> , onSubmitBtnClick: () -> Unit)
-
-
-
-
-    {
+fun FormIsian(pilihanJK: List<String> , onSubmitBtnClick: () -> Unit) {
     val jenisK = listOf("Laki-laki", "Perempuan")
     var namaLengkap by remember { mutableStateOf("") }
     var alamat by remember { mutableStateOf("") }
-    var jenisKelamin by remember { mutableStateOf("") }
+    val listData: MutableList<String> = mutableListOf(txtNama,txtGender,txtAlamat) }
 
     Scaffold(
         topBar = {
